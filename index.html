@@ -1,289 +1,1299 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suite Alex | Panel de Herramientas</title>
-    <!-- Tailwind CSS -->
+    <title>Suite Alex | Panel de Herramientas Creativas & IA</title>
+    <meta name="description" content="Suite Alex - Portal unificado de herramientas de inteligencia artificial, edición de video, audio, transcripción y analítica de redes sociales.">
+
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        },
+                        dark: {
+                            950: '#07090e',
+                            900: '#0b0f19',
+                            850: '#111726',
+                            800: '#161f33',
+                            700: '#1f2d4a',
+                        }
+                    },
+                    boxShadow: {
+                        'neon-indigo': '0 0 35px -5px rgba(99, 102, 241, 0.35)',
+                        'neon-pink': '0 0 35px -5px rgba(236, 72, 153, 0.35)',
+                        'neon-cyan': '0 0 35px -5px rgba(6, 182, 212, 0.35)',
+                        'neon-amber': '0 0 35px -5px rgba(245, 158, 11, 0.35)',
+                        'neon-emerald': '0 0 35px -5px rgba(16, 185, 129, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Custom scrollbar for a polished look */
+        /* Modern aesthetic custom styles */
+        :root {
+            color-scheme: dark;
+        }
+
+        /* Custom refined scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 7px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f172a; 
+            background: #07090e;
         }
         ::-webkit-scrollbar-thumb {
-            background: #334155; 
-            border-radius: 4px;
+            background: #1f293d;
+            border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569; 
+            background: #374151;
+        }
+
+        /* Ambient background glow */
+        .ambient-mesh {
+            background-color: #07090e;
+            background-image: 
+                radial-gradient(ellipse 90% 55% at 50% -25%, rgba(99, 102, 241, 0.22), transparent 70%),
+                radial-gradient(circle at 90% 25%, rgba(56, 189, 248, 0.12), transparent 45%),
+                radial-gradient(circle at 10% 65%, rgba(168, 85, 247, 0.14), transparent 50%),
+                radial-gradient(circle at 80% 85%, rgba(236, 72, 153, 0.08), transparent 45%);
+            background-attachment: fixed;
+        }
+
+        /* Dot grid overlay */
+        .dot-grid {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        /* Glassmorphic card styling */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.62);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            background: rgba(22, 32, 56, 0.75);
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Category Glow Effects */
+        .glow-ia:hover {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(99, 102, 241, 0.28);
+            border-color: rgba(129, 140, 248, 0.45);
+        }
+        .glow-video:hover {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(244, 63, 94, 0.28);
+            border-color: rgba(251, 113, 133, 0.45);
+        }
+        .glow-audio:hover {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(14, 165, 233, 0.28);
+            border-color: rgba(56, 189, 248, 0.45);
+        }
+        .glow-redes:hover {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(239, 68, 68, 0.28);
+            border-color: rgba(248, 113, 113, 0.45);
+        }
+        .glow-utilidades:hover {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -5px rgba(16, 185, 129, 0.28);
+            border-color: rgba(52, 211, 153, 0.45);
+        }
+
+        /* Animate pulse badge */
+        @keyframes softPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.08); }
+        }
+        .animate-soft-pulse {
+            animation: softPulse 2.5s infinite ease-in-out;
+        }
+
+        /* Favorite active state */
+        .fav-active svg {
+            fill: #fbbf24;
+            color: #fbbf24 !important;
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-indigo-500 selection:text-white pb-12">
+<body class="ambient-mesh text-slate-100 font-sans min-h-screen selection:bg-indigo-500 selection:text-white relative antialiased">
+    
+    <!-- Subtle Dot Grid Background Layer -->
+    <div class="fixed inset-0 dot-grid pointer-events-none opacity-40 z-0"></div>
 
-    <!-- Navbar / Header -->
-    <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                    <i data-lucide="boxes" class="text-white w-6 h-6"></i>
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-dark-950/75 backdrop-blur-xl border-b border-white/[0.07] transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- Brand Logo & Badge -->
+            <div class="flex items-center gap-3.5">
+                <div class="relative group cursor-pointer">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-2xl blur opacity-40 group-hover:opacity-80 transition duration-500"></div>
+                    <div class="relative w-11 h-11 rounded-xl bg-dark-900 border border-white/15 flex items-center justify-center shadow-lg">
+                        <i data-lucide="boxes" class="text-indigo-400 w-6 h-6"></i>
+                    </div>
                 </div>
-                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-                    Suite Alex
-                </h1>
-            </div>
-            <div class="flex items-center gap-4">
-                <button class="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors border border-slate-700">
-                    <i data-lucide="bell" class="w-5 h-5 text-slate-300"></i>
-                </button>
-                <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 overflow-hidden">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" alt="Alex Profile" class="w-full h-full object-cover">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-bold font-display tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-indigo-300">
+                            Suite Alex
+                        </h1>
+                        <span class="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                            v2.5 Pro
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-400 hidden sm:block">Centro de Control Creativo & IA</p>
                 </div>
             </div>
+
+            <!-- Header Quick Info & Actions -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <!-- Operational Status Indicator -->
+                <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/25 text-emerald-400 text-xs font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-soft-pulse"></span>
+                    <span id="tools-online-count">22 Herramientas activas</span>
+                </div>
+
+                <!-- Date display -->
+                <div id="date-display" class="hidden lg:block text-xs font-medium text-slate-400 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/[0.07]">
+                    --
+                </div>
+
+                <!-- Profile Alex Avatar -->
+                <div class="flex items-center gap-2.5 pl-2 border-l border-white/10">
+                    <div class="relative">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-600/30 border border-indigo-400/30 overflow-hidden shadow-inner flex items-center justify-center">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex&backgroundColor=b6e3f4" alt="Alex Profile" class="w-full h-full object-cover">
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-dark-950 rounded-full"></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 mt-10">
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-20">
         
-        <div class="mb-10 text-center md:text-left">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-3">Bienvenido a tu <span class="text-indigo-400">espacio creativo</span></h2>
-            <p class="text-slate-400 max-w-2xl text-lg">Selecciona la herramienta que necesitas utilizar hoy. Todo tu flujo de trabajo en un solo lugar.</p>
+        <!-- Hero Section -->
+        <div class="mb-10 text-center max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-4 tracking-wide uppercase">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                Tu Espacio de Productividad Todo en Uno
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display tracking-tight text-white mb-4">
+                Potencia tu flujo creativo con <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400">Inteligencia Artificial</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed">
+                Accede rápidamente a tus generadores, conversores, analizadores de métricas y herramientas de producción de video y audio en un solo entorno moderno.
+            </p>
         </div>
 
-        <!-- Buttons Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-            <!-- 1. Generador de contenido V1 (Convertido a enlace) -->
-            <a href="https://alexplus369-coder.github.io/Jinete0002Alex36902/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-                <div class="w-14 h-14 rounded-full bg-indigo-500/10 group-hover:bg-indigo-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="sparkles" class="w-7 h-7 text-indigo-400 group-hover:text-white"></i>
+        <!-- Controls Toolbar: Search & Filters -->
+        <div class="mb-8 space-y-5">
+            
+            <!-- Live Search Bar -->
+            <div class="relative max-w-2xl mx-auto">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                    <i data-lucide="search" class="w-5 h-5"></i>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Generador de contenido V1</span>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Buscar herramienta por nombre o función (ej: reels, audio, youtube, pdf)..." 
+                    class="w-full pl-12 pr-28 py-3.5 bg-dark-900/80 backdrop-blur-md border border-white/15 focus:border-indigo-500 rounded-2xl text-slate-100 placeholder-slate-500 text-sm sm:text-base outline-none transition-all shadow-xl shadow-black/30 focus:ring-2 focus:ring-indigo-500/20"
+                    autocomplete="off"
+                >
+                <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center gap-1.5">
+                    <button id="clear-search-btn" class="hidden text-slate-400 hover:text-white p-1 rounded-md transition" title="Limpiar búsqueda">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                    <kbd class="hidden sm:inline-flex items-center gap-0.5 px-2 py-1 text-[11px] font-semibold text-slate-400 bg-white/[0.07] border border-white/10 rounded-md">
+                        <span>Ctrl</span><span>K</span>
+                    </kbd>
+                </div>
+            </div>
+
+            <!-- Category Filter Chips -->
+            <div class="flex items-center justify-center gap-2 flex-wrap text-xs sm:text-sm pt-2" id="category-filters">
+                <button data-category="all" class="category-btn active px-4 py-2 rounded-xl font-medium transition-all bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 border border-indigo-500 flex items-center gap-2">
+                    <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                    <span>Todas</span>
+                    <span class="count-pill px-1.5 py-0.2 text-[10px] bg-white/20 rounded-full">22</span>
+                </button>
+                <button data-category="ia" class="category-btn px-4 py-2 rounded-xl font-medium transition-all bg-dark-900/80 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-indigo-400"></i>
+                    <span>IA & Creatividad</span>
+                    <span class="count-pill px-1.5 py-0.2 text-[10px] bg-white/10 rounded-full">5</span>
+                </button>
+                <button data-category="video" class="category-btn px-4 py-2 rounded-xl font-medium transition-all bg-dark-900/80 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 flex items-center gap-2">
+                    <i data-lucide="video" class="w-4 h-4 text-rose-400"></i>
+                    <span>Video & Reels</span>
+                    <span class="count-pill px-1.5 py-0.2 text-[10px] bg-white/10 rounded-full">7</span>
+                </button>
+                <button data-category="audio" class="category-btn px-4 py-2 rounded-xl font-medium transition-all bg-dark-900/80 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 flex items-center gap-2">
+                    <i data-lucide="mic" class="w-4 h-4 text-sky-400"></i>
+                    <span>Audio & Voz</span>
+                    <span class="count-pill px-1.5 py-0.2 text-[10px] bg-white/10 rounded-full">3</span>
+                </button>
+                <button data-category="redes" class="category-btn px-4 py-2 rounded-xl font-medium transition-all bg-dark-900/80 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 flex items-center gap-2">
+                    <i data-lucide="youtube" class="w-4 h-4 text-red-400"></i>
+                    <span>YouTube & Redes</span>
+                    <span class="count-pill px-1.5 py-0.2 text-[10px] bg-white/10 rounded-full">5</span>
+                </button>
+                <button data-category="utilidades" class="category-btn px-4 py-2 rounded-xl font-medium transition-all bg-dark-900/80 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 flex items-center gap-2">
+                    <i data-lucide="wrench" class="w-4 h-4 text-emerald-400"></i>
+                    <span>Utilidades</span>
+                    <span class="count-pill px-1.5 py-0.2 text-[10px] bg-white/10 rounded-full">2</span>
+                </button>
+                <button data-category="favorites" class="category-btn px-4 py-2 rounded-xl font-medium transition-all bg-dark-900/80 hover:bg-white/10 text-amber-300 hover:text-amber-200 border border-amber-500/20 flex items-center gap-2">
+                    <i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+                    <span>Favoritos</span>
+                    <span id="fav-count-pill" class="count-pill px-1.5 py-0.2 text-[10px] bg-amber-500/20 text-amber-300 rounded-full">0</span>
+                </button>
+            </div>
+
+            <!-- Dynamic Result Counter Label -->
+            <div class="flex items-center justify-between text-xs text-slate-400 px-2 pt-1 border-b border-white/[0.06] pb-3">
+                <span id="results-count-label">Mostrando todas las 22 herramientas</span>
+                <span class="text-slate-500 hidden sm:inline">Haz clic en una tarjeta para abrir la herramienta</span>
+            </div>
+        </div>
+
+        <!-- Tools Grid -->
+        <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+
+            <!-- 1. Generador de contenido V1 -->
+            <a href="https://alexplus369-coder.github.io/Jinete0002Alex36902/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-1"
+               data-category="ia" 
+               data-keywords="generador contenido v1 texto post ideas redaccion copy ia jinete"
+               class="tool-card glass-card glow-ia group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-13 h-13 w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-indigo-500/30 group-hover:border-indigo-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-indigo-500/15 text-indigo-300 border border-indigo-500/20">IA & Copys</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-indigo-300 transition-colors">
+                        Generador de contenido V1
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Generación estructurada de publicaciones y copies de alto impacto con IA.
+                    </p>
+                </div>
             </a>
 
             <!-- 2. Generador de contenido V2 -->
-			 <a href="https://gemini.google.com/share/872877d122e5" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-                <div class="w-14 h-14 rounded-full bg-indigo-500/10 group-hover:bg-indigo-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="wand-2" class="w-7 h-7 text-indigo-400 group-hover:text-white"></i>
+            <a href="https://gemini.google.com/share/872877d122e5" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-2"
+               data-category="ia" 
+               data-keywords="generador contenido v2 gemini google prompt redaccion inteligencia artificial creatividad"
+               class="tool-card glass-card glow-ia group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="wand-2" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-purple-500/30 group-hover:border-purple-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Generador de contenido V2</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-purple-500/15 text-purple-300 border border-purple-500/20">Gemini Pro</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-purple-300 transition-colors">
+                        Generador de contenido V2
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Asistente avanzado de creación con prompting optimizado en Gemini.
+                    </p>
+                </div>
+            </a>
 
             <!-- 3. Quitar marca de agua -->
-			 <a href="https://alexplus369-coder.github.io/RemoveWTM/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-emerald-600/10 border border-slate-800 hover:border-emerald-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/10">
-                <div class="w-14 h-14 rounded-full bg-emerald-500/10 group-hover:bg-emerald-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="eraser" class="w-7 h-7 text-emerald-400 group-hover:text-white"></i>
+            <a href="https://alexplus369-coder.github.io/RemoveWTM/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-3"
+               data-category="utilidades" 
+               data-keywords="quitar marca de agua watermark logo borrar limpiar imagen remover"
+               class="tool-card glass-card glow-utilidades group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="eraser" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-emerald-500/30 group-hover:border-emerald-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Quitar marca de agua</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">Edición</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-emerald-300 transition-colors">
+                        Quitar marca de agua
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Herramienta ágil para remover marcas, sellos y logos de tus archivos.
+                    </p>
+                </div>
+            </a>
 
             <!-- 4. Texto a Voz -->
-			 <a href="https://alexplus369-coder.github.io/TextoVox/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-sky-600/10 border border-slate-800 hover:border-sky-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-500/10">
-                <div class="w-14 h-14 rounded-full bg-sky-500/10 group-hover:bg-sky-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="volume-2" class="w-7 h-7 text-sky-400 group-hover:text-white"></i>
+            <a href="https://alexplus369-coder.github.io/TextoVox/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-4"
+               data-category="audio" 
+               data-keywords="texto a voz textovox tts locucion audio voz speech narracion sintetizador"
+               class="tool-card glass-card glow-audio group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="volume-2" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-sky-500/30 group-hover:border-sky-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Texto a Voz</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-sky-500/15 text-sky-300 border border-sky-500/20">Voz Sintética</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-sky-300 transition-colors">
+                        Texto a Voz
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Convierte guiones y artículos en locuciones fluidas y realistas.
+                    </p>
+                </div>
+            </a>
 
             <!-- 5. Traductor de audio -->
-			 <a href="https://gemini.google.com/share/95d2a5b6b96b" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-sky-600/10 border border-slate-800 hover:border-sky-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-500/10">
-                <div class="w-14 h-14 rounded-full bg-sky-500/10 group-hover:bg-sky-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="languages" class="w-7 h-7 text-sky-400 group-hover:text-white"></i>
+            <a href="https://gemini.google.com/share/95d2a5b6b96b" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-5"
+               data-category="audio" 
+               data-keywords="traductor audio idiomas traducir transcripcion sonido voz gemini"
+               class="tool-card glass-card glow-audio group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="languages" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-blue-500/30 group-hover:border-blue-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Traductor de audio</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-blue-500/15 text-blue-300 border border-blue-500/20">Traducción</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-blue-300 transition-colors">
+                        Traductor de audio
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Traducción y transcripción multilingüe de audios y podcasts.
+                    </p>
+                </div>
+            </a>
 
-            <!-- 6. Generador de subtitulos VIDEO -->
-			 <a href="https://gemini.google.com/share/e2325cd2512d" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-amber-600/10 border border-slate-800 hover:border-amber-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/10">
-                <div class="w-14 h-14 rounded-full bg-amber-500/10 group-hover:bg-amber-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="subtitles" class="w-7 h-7 text-amber-400 group-hover:text-white"></i>
+            <!-- 6. Generador subtítulos VIDEO -->
+            <a href="https://gemini.google.com/share/e2325cd2512d" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-6"
+               data-category="video" 
+               data-keywords="generador subtitulos video srt timing sincronizacion clips reels gemini"
+               class="tool-card glass-card glow-video group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="subtitles" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-amber-500/30 group-hover:border-amber-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Generador subtítulos VIDEO</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-300 border border-amber-500/20">Video Captions</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-amber-300 transition-colors">
+                        Subtítulos VIDEO
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Crea y sincroniza subtítulos precisos para videos verticales y horizontales.
+                    </p>
+                </div>
+            </a>
 
-            <!-- 7. Generador de subtitulos AUDIO -->
-			 <a href="https://gemini.google.com/share/454db6fc81a5" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-amber-600/10 border border-slate-800 hover:border-amber-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/10">
-                <div class="w-14 h-14 rounded-full bg-amber-500/10 group-hover:bg-amber-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="message-square-text" class="w-7 h-7 text-amber-400 group-hover:text-white"></i>
+            <!-- 7. Generador subtítulos AUDIO -->
+            <a href="https://gemini.google.com/share/454db6fc81a5" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-7"
+               data-category="audio" 
+               data-keywords="generador subtitulos audio transcripcion notas texto dictado voz gemini"
+               class="tool-card glass-card glow-audio group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center text-yellow-400 group-hover:bg-yellow-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="message-square-text" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-yellow-500/30 group-hover:border-yellow-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Generador subtítulos AUDIO</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-yellow-500/15 text-yellow-300 border border-yellow-500/20">Audio Transcribe</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-yellow-300 transition-colors">
+                        Subtítulos AUDIO
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Convierte grabaciones de voz y notas sonoras en texto estructurado.
+                    </p>
+                </div>
+            </a>
 
-            <!-- 8. Generador de infografias -->
-			 <a href="https://gemini.google.com/share/fb24c215d914" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-purple-600/10 border border-slate-800 hover:border-purple-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10">
-                <div class="w-14 h-14 rounded-full bg-purple-500/10 group-hover:bg-purple-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="pie-chart" class="w-7 h-7 text-purple-400 group-hover:text-white"></i>
+            <!-- 8. Generador de infografías -->
+            <a href="https://gemini.google.com/share/fb24c215d914" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-8"
+               data-category="ia" 
+               data-keywords="generador infografias graficos diagramas visual datos resumen conceptual gemini"
+               class="tool-card glass-card glow-ia group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="pie-chart" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-purple-500/30 group-hover:border-purple-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Generador de infografías</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-purple-500/15 text-purple-300 border border-purple-500/20">Diseño Visual</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-purple-300 transition-colors">
+                        Generador de infografías
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Estructuración visual y esquematización de datos y conceptos complejos.
+                    </p>
+                </div>
+            </a>
 
             <!-- 9. Guión de Reels -->
-			 <a href="https://alexplus369-coder.github.io/MagicHistory/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-pink-600/10 border border-slate-800 hover:border-pink-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-pink-500/10">
-                <div class="w-14 h-14 rounded-full bg-pink-500/10 group-hover:bg-pink-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="file-text" class="w-7 h-7 text-pink-400 group-hover:text-white"></i>
+            <a href="https://alexplus369-coder.github.io/MagicHistory/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-9"
+               data-category="video" 
+               data-keywords="guion reels tiktok shorts storytelling historia magichistory ganchos video"
+               class="tool-card glass-card glow-video group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:bg-pink-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="file-text" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-pink-500/30 group-hover:border-pink-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Guión de Reels</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-pink-500/15 text-pink-300 border border-pink-500/20">Storytelling</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-pink-300 transition-colors">
+                        Guión de Reels
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Fórmulas narrativas y ganchos para crear guiones de alta retención.
+                    </p>
+                </div>
+            </a>
 
             <!-- 10. Secuenciador de Reels -->
-			 <a href="https://gemini.google.com/share/831541f4386c" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-pink-600/10 border border-slate-800 hover:border-pink-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-pink-500/10">
-                <div class="w-14 h-14 rounded-full bg-pink-500/10 group-hover:bg-pink-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="list-video" class="w-7 h-7 text-pink-400 group-hover:text-white"></i>
+            <a href="https://gemini.google.com/share/831541f4386c" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-10"
+               data-category="video" 
+               data-keywords="secuenciador reels ritmo tomas escenas cortes clips gemini video"
+               class="tool-card glass-card glow-video group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="list-video" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-rose-500/30 group-hover:border-rose-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Secuenciador de Reels</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-rose-500/15 text-rose-300 border border-rose-500/20">Edición & Ritmo</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-rose-300 transition-colors">
+                        Secuenciador de Reels
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Planificación por segundos del ritmo visual, planos y efectos sonoros.
+                    </p>
+                </div>
+            </a>
 
             <!-- 11. Teleprompter -->
-			 <a href="https://alexplus369-coder.github.io/CAMPROMPTER/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-fuchsia-600/10 border border-slate-800 hover:border-fuchsia-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-fuchsia-500/10">
-                <div class="w-14 h-14 rounded-full bg-fuchsia-500/10 group-hover:bg-fuchsia-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="monitor-play" class="w-7 h-7 text-fuchsia-400 group-hover:text-white"></i>
+            <a href="https://alexplus369-coder.github.io/CAMPROMPTER/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-11"
+               data-category="video" 
+               data-keywords="teleprompter camprompter camara lectura guion velocidad espejo prompter"
+               class="tool-card glass-card glow-video group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-fuchsia-500/15 border border-fuchsia-500/30 flex items-center justify-center text-fuchsia-400 group-hover:bg-fuchsia-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="monitor-play" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-fuchsia-500/30 group-hover:border-fuchsia-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Teleprompter</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/20">Producción</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-fuchsia-300 transition-colors">
+                        Teleprompter
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Prompter profesional con velocidad regulable para grabar frente a cámara.
+                    </p>
+                </div>
+            </a>
 
             <!-- 12. Conversor de video -->
-			 <a href="https://conversor-mp-6.vercel.app/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-cyan-600/10 border border-slate-800 hover:border-cyan-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-500/10">
-                <div class="w-14 h-14 rounded-full bg-cyan-500/10 group-hover:bg-cyan-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="arrow-right-left" class="w-7 h-7 text-cyan-400 group-hover:text-white"></i>
+            <a href="https://conversor-mp-6.vercel.app/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-12"
+               data-category="video" 
+               data-keywords="conversor video formato mp4 mov avi compilar comprimir convertir vercel"
+               class="tool-card glass-card glow-video group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="arrow-right-left" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-cyan-500/30 group-hover:border-cyan-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Conversor de video</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-cyan-500/15 text-cyan-300 border border-cyan-500/20">Formatos</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-cyan-300 transition-colors">
+                        Conversor de video
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Transforma formatos de video rápidamente con compresión sin pérdidas.
+                    </p>
+                </div>
+            </a>
 
             <!-- 13. Video Metrics -->
-			 <a href="https://alexplus369-coder.github.io/VOPTIMIZER/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-rose-600/10 border border-slate-800 hover:border-rose-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-500/10">
-                <div class="w-14 h-14 rounded-full bg-rose-500/10 group-hover:bg-rose-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="trending-up" class="w-7 h-7 text-rose-400 group-hover:text-white"></i>
+            <a href="https://alexplus369-coder.github.io/VOPTIMIZER/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-13"
+               data-category="video" 
+               data-keywords="video metrics metricas voptimizer retencion ctr duracion analitica optimizador"
+               class="tool-card glass-card glow-video group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-rose-500/30 group-hover:border-rose-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Video Metrics</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-rose-500/15 text-rose-300 border border-rose-500/20">Analítica</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-rose-300 transition-colors">
+                        Video Metrics
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Analiza curvas de retención y puntos clave de abandono de tus videos.
+                    </p>
+                </div>
+            </a>
 
             <!-- 14. Generador de Metadatos -->
-			 <a href="https://alexplus369-coder.github.io/CheckVideo/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-                <div class="w-14 h-14 rounded-full bg-indigo-500/10 group-hover:bg-indigo-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="tags" class="w-7 h-7 text-indigo-400 group-hover:text-white"></i>
+            <a href="https://alexplus369-coder.github.io/CheckVideo/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-14"
+               data-category="redes" 
+               data-keywords="generador metadatos checkvideo seo tags etiquetas titulos descripcion youtube"
+               class="tool-card glass-card glow-redes group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="tags" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-indigo-500/30 group-hover:border-indigo-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Generador de Metadatos</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-indigo-500/15 text-indigo-300 border border-indigo-500/20">SEO Video</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-indigo-300 transition-colors">
+                        Generador de Metadatos
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Crea títulos con alto CTR, etiquetas indexables y descripciones optimizadas.
+                    </p>
+                </div>
+            </a>
 
-            <!-- 15. Analisis YouTube -->
-			 <a href="https://alexplus369-coder.github.io/YTBResearchV3.0/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-red-600/10 border border-slate-800 hover:border-red-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-red-500/10">
-                <div class="w-14 h-14 rounded-full bg-red-500/10 group-hover:bg-red-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="youtube" class="w-7 h-7 text-red-400 group-hover:text-white"></i>
+            <!-- 15. Análisis YouTube -->
+            <a href="https://alexplus369-coder.github.io/YTBResearchV3.0/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-15"
+               data-category="redes" 
+               data-keywords="analisis youtube ytbresearch palabras clave nichos tendencias visualizaciones"
+               class="tool-card glass-card glow-redes group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-red-500/15 border border-red-500/30 flex items-center justify-center text-red-400 group-hover:bg-red-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="youtube" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-red-500/30 group-hover:border-red-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Análisis YouTube</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-red-500/15 text-red-300 border border-red-500/20">Investigación</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-red-300 transition-colors">
+                        Análisis YouTube
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Investigación de mercado, volumen de búsqueda y gaps de contenido en YouTube.
+                    </p>
+                </div>
+            </a>
 
             <!-- 16. Analizador de guiones YouTube -->
-			 <a href="https://alexplus369-coder.github.io/AuditorGUI/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-red-600/10 border border-slate-800 hover:border-red-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-red-500/10">
-                <div class="w-14 h-14 rounded-full bg-red-500/10 group-hover:bg-red-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="clipboard-list" class="w-7 h-7 text-red-400 group-hover:text-white"></i>
+            <a href="https://alexplus369-coder.github.io/AuditorGUI/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-16"
+               data-category="redes" 
+               data-keywords="analizador guiones youtube auditorgui auditoria retencion pacing estructura"
+               class="tool-card glass-card glow-redes group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-red-500/15 border border-red-500/30 flex items-center justify-center text-red-400 group-hover:bg-red-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="clipboard-check" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-red-500/30 group-hover:border-red-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Analizador de guiones YouTube</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-red-500/15 text-red-300 border border-red-500/20">Auditoría</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-red-300 transition-colors">
+                        Auditor de Guiones
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Audita tus guiones para corregir baches de atención y maximizar la retención.
+                    </p>
+                </div>
+            </a>
 
             <!-- 17. Analizador de canales YouTube -->
-			 <a href="https://gemini.google.com/share/ebd0b1d69654" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-red-600/10 border border-slate-800 hover:border-red-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-red-500/10">
-                <div class="w-14 h-14 rounded-full bg-red-500/10 group-hover:bg-red-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="tv" class="w-7 h-7 text-red-400 group-hover:text-white"></i>
+            <a href="https://gemini.google.com/share/ebd0b1d69654" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-17"
+               data-category="redes" 
+               data-keywords="analizador canales youtube canal competencia creadores benchmark gemini"
+               class="tool-card glass-card glow-redes group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-red-500/15 border border-red-500/30 flex items-center justify-center text-red-400 group-hover:bg-red-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="tv" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-red-500/30 group-hover:border-red-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Analizador de canales YouTube</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-red-500/15 text-red-300 border border-red-500/20">Benchmark</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-red-300 transition-colors">
+                        Canales YouTube
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Diagnóstico integral del posicionamiento y estrategias de canales competidores.
+                    </p>
+                </div>
+            </a>
 
             <!-- 18. Analizador de miniaturas -->
-			 <a href="https://gemini.google.com/share/d517a4b34567" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-orange-600/10 border border-slate-800 hover:border-orange-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/10">
-                <div class="w-14 h-14 rounded-full bg-orange-500/10 group-hover:bg-orange-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="image" class="w-7 h-7 text-orange-400 group-hover:text-white"></i>
+            <a href="https://gemini.google.com/share/d517a4b34567" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-18"
+               data-category="redes" 
+               data-keywords="analizador miniaturas thumbnail ctr diseno contraste portada clic gemini"
+               class="tool-card glass-card glow-redes group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-500/15 border border-orange-500/30 flex items-center justify-center text-orange-400 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="image" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-orange-500/30 group-hover:border-orange-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Analizador de miniaturas</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-orange-500/15 text-orange-300 border border-orange-500/20">Optimizar CTR</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-orange-300 transition-colors">
+                        Analizador de miniaturas
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Evalúa legibilidad en móviles, balance cromático y atracción de clics.
+                    </p>
+                </div>
+            </a>
 
             <!-- 19. Analizador TikTok -->
-			 <a href="https://gemini.google.com/share/8ca5cc2794a4" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-teal-600/10 border border-slate-800 hover:border-teal-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10">
-                <div class="w-14 h-14 rounded-full bg-teal-500/10 group-hover:bg-teal-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="smartphone" class="w-7 h-7 text-teal-400 group-hover:text-white"></i>
+            <a href="https://gemini.google.com/share/8ca5cc2794a4" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-19"
+               data-category="redes" 
+               data-keywords="analizador tiktok tendencias viral hashtags sonido creadores gemini"
+               class="tool-card glass-card glow-redes group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="smartphone" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-teal-500/30 group-hover:border-teal-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Analizador TikTok</span>
-            </button>
-			</a>
-			
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-teal-500/15 text-teal-300 border border-teal-500/20">Viralidad</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-teal-300 transition-colors">
+                        Analizador TikTok
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Exploración de trends sonoros, hashtags emergentes y patrones de viralidad.
+                    </p>
+                </div>
+            </a>
+
             <!-- 20. Conversor de PDF -->
-			 <a href="https://pd-fto-png.vercel.app/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-teal-600/10 border border-slate-800 hover:border-teal-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10">
-                <div class="w-14 h-14 rounded-full bg-teal-500/10 group-hover:bg-teal-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="smartphone" class="w-7 h-7 text-teal-400 group-hover:text-white"></i>
+            <a href="https://pd-fto-png.vercel.app/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-20"
+               data-category="utilidades" 
+               data-keywords="conversor pdf png imagen documentos extraer transformar vercel"
+               class="tool-card glass-card glow-utilidades group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="file-down" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-emerald-500/30 group-hover:border-emerald-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">Conversor PDF</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">Documentos</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-emerald-300 transition-colors">
+                        Conversor PDF a PNG
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Exporta páginas de documentos PDF en imágenes de alta resolución al instante.
+                    </p>
+                </div>
+            </a>
 
-			 <!-- 21. AI TEXT EDITOR PRO -->
-			 <a href="https://alexplus369-coder.github.io/AIEDITORPRO/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-teal-600/10 border border-slate-800 hover:border-teal-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10">
-                <div class="w-14 h-14 rounded-full bg-teal-500/10 group-hover:bg-teal-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="smartphone" class="w-7 h-7 text-teal-400 group-hover:text-white"></i>
+            <!-- 21. AI TEXT EDITOR PRO -->
+            <a href="https://alexplus369-coder.github.io/AIEDITORPRO/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-21"
+               data-category="ia" 
+               data-keywords="editor texto pro aieditorpro redaccion corrector ia estilo formateador contenido"
+               class="tool-card glass-card glow-ia group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="edit-3" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-indigo-500/30 group-hover:border-indigo-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">EDITOR TEXTO PRO</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-indigo-500/15 text-indigo-300 border border-indigo-500/20">Editor Pro</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-indigo-300 transition-colors">
+                        Editor de Texto PRO
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Entorno avanzado de escritura asistida con corrección gramatical y estilística.
+                    </p>
+                </div>
+            </a>
 
-			<a href="https://frameshift-b1m5.vercel.app/" target="_blank" rel="noopener noreferrer" class="group bg-slate-900 hover:bg-indigo-600/10 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
-            <button class="group bg-slate-900 hover:bg-teal-600/10 border border-slate-800 hover:border-teal-500 rounded-2xl p-6 flex flex-col items-center justify-center text-center gap-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10">
-                <div class="w-14 h-14 rounded-full bg-teal-500/10 group-hover:bg-teal-500 flex items-center justify-center transition-colors duration-300">
-                    <i data-lucide="smartphone" class="w-7 h-7 text-teal-400 group-hover:text-white"></i>
+            <!-- 22. FRAMESHIFT -->
+            <a href="https://frameshift-b1m5.vercel.app/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               data-id="tool-22"
+               data-category="video" 
+               data-keywords="frameshift video fotogramas animacion transiciones fx edicion vercel"
+               class="tool-card glass-card glow-video group rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-md">
+                        <i data-lucide="film" class="w-6 h-6"></i>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" class="favorite-btn p-1.5 rounded-lg text-slate-500 hover:text-amber-400 hover:bg-white/5 transition" title="Marcar como favorito" aria-label="Favorito">
+                            <i data-lucide="star" class="w-4 h-4"></i>
+                        </button>
+                        <div class="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-cyan-500/30 group-hover:border-cyan-400/50 transition">
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </div>
                 </div>
-                <span class="font-semibold text-lg text-slate-200 group-hover:text-white">FRAMESHIFT</span>
-            </button>
-			</a>
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-cyan-500/15 text-cyan-300 border border-cyan-500/20">Motion & FX</span>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg text-slate-100 group-hover:text-cyan-300 transition-colors">
+                        Frameshift
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
+                        Control ágil y ajuste dinámico de keyframes para efectos visuales.
+                    </p>
+                </div>
+            </a>
 
         </div>
+
+        <!-- No Results Fallback State -->
+        <div id="no-results" class="hidden text-center py-16 px-4">
+            <div class="w-16 h-16 rounded-2xl bg-dark-900 border border-white/10 flex items-center justify-center text-slate-500 mx-auto mb-4">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-200">No encontramos herramientas coincidentes</h3>
+            <p class="text-sm text-slate-400 max-w-sm mx-auto mt-1 mb-6">
+                Prueba buscando con otro término o limpia los filtros para ver la lista completa.
+            </p>
+            <button id="reset-filters-btn" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition shadow-lg shadow-indigo-600/30 inline-flex items-center gap-2">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                Restablecer búsqueda
+            </button>
+        </div>
+
     </main>
 
-    <!-- Initialize Icons -->
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/[0.07] bg-dark-950/80 backdrop-blur-md py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                    <i data-lucide="boxes" class="w-3.5 h-3.5"></i>
+                </div>
+                <span>© <span id="current-year">2026</span> Suite Alex. Desarrollado para creadores digitales.</span>
+            </div>
+            <div class="flex items-center gap-5">
+                <a href="#top" class="hover:text-slate-200 transition flex items-center gap-1">
+                    <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+                    Volver arriba
+                </a>
+                <span class="text-slate-600">•</span>
+                <span class="inline-flex items-center gap-1.5 text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    Flujo de trabajo optimizado
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic & State Management -->
     <script>
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Set dynamic date
+            const dateDisplay = document.getElementById('date-display');
+            if (dateDisplay) {
+                const now = new Date();
+                const options = { weekday: 'short', day: 'numeric', month: 'short' };
+                dateDisplay.textContent = now.toLocaleDateString('es-ES', options).replace('.', '');
+            }
+
+            const currentYearEl = document.getElementById('current-year');
+            if (currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
+            }
+
+            // State
+            let activeCategory = 'all';
+            let searchQuery = '';
+            const STORAGE_KEY = 'suite_alex_favorites_v2';
+            let favorites = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+            // DOM Elements
+            const searchInput = document.getElementById('search-input');
+            const clearSearchBtn = document.getElementById('clear-search-btn');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const toolCards = document.querySelectorAll('.tool-card');
+            const noResults = document.getElementById('no-results');
+            const resetFiltersBtn = document.getElementById('reset-filters-btn');
+            const resultsCountLabel = document.getElementById('results-count-label');
+            const favCountPill = document.getElementById('fav-count-pill');
+
+            // Update Favorites UI
+            function updateFavoritesUI() {
+                favCountPill.textContent = favorites.length;
+                
+                toolCards.forEach(card => {
+                    const id = card.dataset.id;
+                    const favBtn = card.querySelector('.favorite-btn');
+                    if (favorites.includes(id)) {
+                        favBtn.classList.add('fav-active');
+                        favBtn.querySelector('svg').style.fill = '#fbbf24';
+                        favBtn.querySelector('svg').style.color = '#fbbf24';
+                        favBtn.setAttribute('title', 'Quitar de favoritos');
+                    } else {
+                        favBtn.classList.remove('fav-active');
+                        favBtn.querySelector('svg').style.fill = 'none';
+                        favBtn.querySelector('svg').style.color = '';
+                        favBtn.setAttribute('title', 'Añadir a favoritos');
+                    }
+                });
+            }
+
+            // Filter logic
+            function filterTools() {
+                const query = searchQuery.trim().toLowerCase();
+                let visibleCount = 0;
+
+                toolCards.forEach(card => {
+                    const id = card.dataset.id;
+                    const cardCategory = card.dataset.category;
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const keywords = (card.dataset.keywords || '').toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+
+                    const matchesCategory = 
+                        activeCategory === 'all' ? true :
+                        activeCategory === 'favorites' ? favorites.includes(id) :
+                        cardCategory === activeCategory;
+
+                    const matchesQuery = 
+                        !query || 
+                        title.includes(query) || 
+                        keywords.includes(query) || 
+                        desc.includes(query);
+
+                    if (matchesCategory && matchesQuery) {
+                        card.classList.remove('hidden');
+                        card.classList.add('flex');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                        card.classList.remove('flex');
+                    }
+                });
+
+                // Handle no results
+                if (visibleCount === 0) {
+                    noResults.classList.remove('hidden');
+                    if (activeCategory === 'favorites' && favorites.length === 0) {
+                        noResults.querySelector('h3').textContent = 'No tienes herramientas favoritas aún';
+                        noResults.querySelector('p').textContent = 'Haz clic en la estrella de cualquier tarjeta para fijarla en tus favoritos.';
+                    } else {
+                        noResults.querySelector('h3').textContent = 'No encontramos herramientas coincidentes';
+                        noResults.querySelector('p').textContent = 'Prueba buscando con otro término o limpia los filtros para ver la lista completa.';
+                    }
+                } else {
+                    noResults.classList.add('hidden');
+                }
+
+                // Update results label
+                if (activeCategory === 'favorites') {
+                    resultsCountLabel.textContent = `Mostrando ${visibleCount} herramienta${visibleCount === 1 ? '' : 's'} favorita${visibleCount === 1 ? '' : 's'}`;
+                } else if (query) {
+                    resultsCountLabel.textContent = `Mostrando ${visibleCount} resultado${visibleCount === 1 ? '' : 's'} para "${query}"`;
+                } else if (activeCategory !== 'all') {
+                    resultsCountLabel.textContent = `Mostrando ${visibleCount} herramienta${visibleCount === 1 ? '' : 's'} de la categoría seleccionada`;
+                } else {
+                    resultsCountLabel.textContent = `Mostrando todas las ${visibleCount} herramientas disponibles`;
+                }
+            }
+
+            // Search input listener
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                if (searchQuery) {
+                    clearSearchBtn.classList.remove('hidden');
+                } else {
+                    clearSearchBtn.classList.add('hidden');
+                }
+                filterTools();
+            });
+
+            // Clear search button
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                clearSearchBtn.classList.add('hidden');
+                searchInput.focus();
+                filterTools();
+            });
+
+            // Reset filters
+            resetFiltersBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                searchQuery = '';
+                clearSearchBtn.classList.add('hidden');
+                
+                categoryBtns.forEach(b => {
+                    b.classList.remove('bg-indigo-600', 'text-white', 'shadow-indigo-600/30', 'border-indigo-500');
+                    b.classList.add('bg-dark-900/80', 'text-slate-300', 'border-white/10');
+                });
+                const allBtn = document.querySelector('[data-category="all"]');
+                allBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-indigo-600/30', 'border-indigo-500');
+                allBtn.classList.remove('bg-dark-900/80', 'text-slate-300', 'border-white/10');
+
+                activeCategory = 'all';
+                filterTools();
+            });
+
+            // Category buttons listeners
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => {
+                        b.classList.remove('bg-indigo-600', 'text-white', 'shadow-indigo-600/30', 'border-indigo-500');
+                        b.classList.add('bg-dark-900/80', 'text-slate-300', 'border-white/10');
+                    });
+
+                    btn.classList.remove('bg-dark-900/80', 'text-slate-300', 'border-white/10');
+                    btn.classList.add('bg-indigo-600', 'text-white', 'shadow-indigo-600/30', 'border-indigo-500');
+
+                    activeCategory = btn.dataset.category;
+                    filterTools();
+                });
+            });
+
+            // Favorite button toggles
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const card = btn.closest('.tool-card');
+                    const id = card.dataset.id;
+
+                    if (favorites.includes(id)) {
+                        favorites = favorites.filter(favId => favId !== id);
+                    } else {
+                        favorites.push(id);
+                    }
+
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+                    updateFavoritesUI();
+
+                    if (activeCategory === 'favorites') {
+                        filterTools();
+                    }
+                });
+            });
+
+            // Keyboard shortcut for search (Ctrl+K or /)
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    searchInput.focus();
+                    searchInput.select();
+                } else if (e.key === '/' && document.activeElement !== searchInput) {
+                    e.preventDefault();
+                    searchInput.focus();
+                } else if (e.key === 'Escape' && document.activeElement === searchInput) {
+                    searchInput.blur();
+                }
+            });
+
+            // Initial UI setup
+            updateFavoritesUI();
+            filterTools();
+        });
     </script>
 </body>
 </html>
